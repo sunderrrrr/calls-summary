@@ -5,17 +5,18 @@ import (
 	"api/pkg/handlers"
 	"api/pkg/repository"
 	"api/pkg/service"
-	"api/utils/logger"
+	"api/pkg/utils/logger"
 	"fmt"
+	"github.com/lpernett/godotenv"
+	"log"
 	"os"
 )
 
 func main() {
-	/*if err := godotenv.Load(".env"); err != nil {
+	if err := godotenv.Load(".env"); err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
-	}*/
+	}
 	fmt.Println("Initializing...")
-	fmt.Println("\n██╗   ██╗███████╗██████╗ ██████╗ ██╗███████╗██╗   ██╗\n██║   ██║██╔════╝██╔══██╗██╔══██╗██║██╔════╝╚██╗ ██╔╝\n██║   ██║█████╗  ██████╔╝██████╔╝██║█████╗   ╚████╔╝ \n╚██╗ ██╔╝██╔══╝  ██╔══██╗██╔══██╗██║██╔══╝    ╚██╔╝  \n ╚████╔╝ ███████╗██║  ██║██████╔╝██║██║        ██║   \n  ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝        ╚═╝   \n                                                     \n")
 	fmt.Println("Version: 1.0.0")
 	db, err := repository.NewDB(repository.DB{
 		Hostname: os.Getenv("DB_HOST"),
@@ -33,7 +34,7 @@ func main() {
 	NewService := service.NewService(NewRepository)
 	NewHandler := handlers.NewHandler(NewService)
 	server := new(api.Server)
-	logger.Log.Println("Running server")
+	logger.Log.Println("Running server on port", os.Getenv("SERVER_PORT"))
 	if err = server.Start(os.Getenv("SERVER_PORT"), NewHandler.InitRoutes()); err != nil {
 		logger.Log.Fatalf("Fatal Error: %v", err)
 	}

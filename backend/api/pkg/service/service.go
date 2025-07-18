@@ -1,14 +1,18 @@
 package service
 
-import "api/pkg/repository"
+import (
+	"api/models"
+	"api/pkg/repository"
+)
 
 type Service struct {
 	Auth
 }
 
 type Auth interface {
-	signUp(email, password string) (int, error)
-	signIn(email, password string) (string, error)
+	SignUp(input models.SignUpInput) (int, error)           // register
+	GenerateToken(input models.SignInInput) (string, error) // login
+	ParseToken(token string) (models.User, error)           // middleware
 }
 
 func NewService(repository *repository.Repository) *Service {

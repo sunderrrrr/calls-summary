@@ -1,9 +1,10 @@
 package repository
 
 import (
-	"api/utils/logger"
+	"api/pkg/utils/logger"
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 type DB struct {
@@ -14,6 +15,11 @@ type DB struct {
 	Dbname   string
 	SSLMode  string
 }
+
+const (
+	userDb    = "users"
+	recordsDb = "calls"
+)
 
 func NewDB(config DB) (*sqlx.DB, error) {
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", config.Hostname, config.Port, config.Username, config.Password, config.Dbname, config.SSLMode)

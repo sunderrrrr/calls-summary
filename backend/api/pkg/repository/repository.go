@@ -9,8 +9,8 @@ type Repository struct {
 	Auth
 }
 type Auth interface {
-	signUp(email, password string) (int, error)
-	signIn(email, password string) (models.User, error)
+	SignUp(email, name, password string) (int, error)
+	GetUser(email, password string) (models.User, error)
 }
 
 func NewRepository(db *sqlx.DB) *Repository {

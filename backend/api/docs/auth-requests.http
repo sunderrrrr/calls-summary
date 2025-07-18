@@ -1,0 +1,19 @@
+### Регистрация
+POST http://localhost:8080/api/v1/auth/sign-up
+Content-Type: application/json
+
+{
+  "name": "Иван Иванов",
+  "email": "ivan@example.com",
+  "password": "strongpassword123"
+}
+
+### Логин
+POST http://localhost:8080/api/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "ivan@example.com",
+  "password": "strongpassword123"
+}
+
