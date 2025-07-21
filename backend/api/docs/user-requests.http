@@ -1,0 +1,9 @@
+### Проверка валидности токена
+GET http://localhost:8080/api/v1/user/ping
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTMxMzY5NTIsImlhdCI6MTc1MzA5Mzc1MiwiaWQiOjMsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.RYHmQpPGq2EpBIX-ZD3wDgDU2sq_-8_zhtOhbwo9-_Y
+
+### Публичные данные пользователя
+GET http://localhost:8080/api/v1/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTMxMzY5NTIsImlhdCI6MTc1MzA5Mzc1MiwiaWQiOjMsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.RYHmQpPGq2EpBIX-ZD3wDgDU2sq_-8_zhtOhbwo9-_Y
+
+

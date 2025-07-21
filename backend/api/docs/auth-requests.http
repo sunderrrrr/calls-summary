@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-  "name": "Иван Иванов",
+  "nam": "Иван Иванов",
   "email": "ivan@example.com",
   "password": "strongpassword123"
 }

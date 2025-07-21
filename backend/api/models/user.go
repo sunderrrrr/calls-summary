@@ -10,12 +10,27 @@ type User struct {
 }
 
 type SignUpInput struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Name     string `json:"name" binding:"required"`
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
 type SignInInput struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
+}
+
+type UserReset struct {
+	Token   string `json:"token" binding:"required"`
+	NewPass string `json:"new_password" binding:"required"`
+}
+
+type ResetRequest struct {
+	Login string `json:"login" binding:"required"`
+}
+
+type UserInfo struct {
+	Id    int    `json:"id"`
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }

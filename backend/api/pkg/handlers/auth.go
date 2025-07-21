@@ -10,12 +10,12 @@ import (
 func (h *Handler) signUp(c *gin.Context) {
 	var input models.SignUpInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		responser.NewErrorResponse(c, 400, "invalid input data")
+		responser.NewErrorResponse(c, 400, "field validation fail")
 		return
 	}
 	id, err := h.service.Auth.SignUp(input)
 	if err != nil {
-		responser.NewErrorResponse(c, 500, "sign up failed")
+		responser.NewErrorResponse(c, 400, "user already exists")
 		logger.Log.Errorf("sign up error: %v", err)
 		return
 	}
@@ -25,12 +25,12 @@ func (h *Handler) signUp(c *gin.Context) {
 func (h *Handler) signIn(c *gin.Context) {
 	var input models.SignInInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		responser.NewErrorResponse(c, 400, "invalid input data")
+		responser.NewErrorResponse(c, 400, "field validation fail")
 		return
 	}
 	token, err := h.service.Auth.GenerateToken(input)
 	if err != nil {
-		responser.NewErrorResponse(c, 500, "sign in failed")
+		responser.NewErrorResponse(c, 400, "user don't exist")
 		logger.Log.Errorf("sign in error: %v", err)
 		return
 	}
