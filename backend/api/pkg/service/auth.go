@@ -20,12 +20,6 @@ func NewAuthService(repo repository.Auth) *AuthService {
 	return &AuthService{repo: repo}
 }
 
-const (
-	salt      = "hifu&hfI&fG&Igaw"
-	secretKey = "2c3982433nc89m43v3n89323492u49"
-	tokenTTL  = 12 * time.Hour
-)
-
 type tokenClaims struct {
 	jwt.StandardClaims
 	Id    int    `json:"id"`
