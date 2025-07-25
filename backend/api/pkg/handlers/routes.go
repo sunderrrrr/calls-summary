@@ -2,7 +2,9 @@ package handlers
 
 import (
 	"api/pkg/service"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 type Handler struct {
@@ -14,7 +16,16 @@ func NewHandler(service *service.Service) *Handler {
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
-	r := gin.Default()
+	r := gin.New()
+	r.RedirectTrailingSlash = false
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Baggage", "Sentry-Trace"},
+		ExposeHeaders:    []string{"Content-Length", "Authorization"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 	r.RedirectTrailingSlash = false
 	api := r.Group("/api", h.requestRateLimit)
 	{
@@ -36,7 +47,11 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				user.GET("/ping", h.Ping)
 				user.GET("/", h.getUserInfo)
 			}
+			report := v1.Group("/report", h.userIdentify)
+			{
+				report.POST("/", h.reportOfCall)
 
+			}
 		}
 
 	}

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"api/models"
+	"api/pkg/utils/logger"
 	"api/pkg/utils/responser"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -30,6 +31,12 @@ func (h *Handler) forgotPassword(c *gin.Context) {
 		responser.NewErrorResponse(c, http.StatusBadRequest, "field validation fail")
 		return
 	}
+	if err := h.service.User.ForgotPassword(input); err != nil {
+		responser.NewErrorResponse(c, http.StatusInternalServerError, "failed to process forgot password request")
+		logger.Log.Errorf("failed to forgot password request: %v", err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "reset link sent to your email"})
 
 }
 
@@ -39,4 +46,10 @@ func (h *Handler) resetPassword(c *gin.Context) {
 		responser.NewErrorResponse(c, http.StatusBadRequest, "field validation fail")
 		return
 	}
+	if err := h.service.User.ResetPassword(input); err != nil {
+		responser.NewErrorResponse(c, http.StatusInternalServerError, "failed to reset password")
+		logger.Log.Errorf("failed to reset password: %v", err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "password reset successfully"})
 }

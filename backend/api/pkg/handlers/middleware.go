@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"api/models"
+	"api/pkg/utils/logger"
 	"api/pkg/utils/responser"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -19,16 +20,21 @@ func (h *Handler) userIdentify(c *gin.Context) {
 	header := c.GetHeader("Authorization")
 	if header == "" {
 		responser.NewErrorResponse(c, http.StatusUnauthorized, "no authorization header")
+		logger.Log.Errorf("no authorization header")
 		return
 	}
 	headerParts := strings.Split(header, " ")
 	if len(headerParts) != 2 {
 		responser.NewErrorResponse(c, http.StatusUnauthorized, "invalid authorization header")
+		logger.Log.Errorf("invalid authorization header: %v", headerParts)
+		return
 	}
 	token := headerParts[1]
 	user, err := h.service.Auth.ParseToken(token)
 	if err != nil {
-		fmt.Println(err)
+		logger.Log.Errorf("error processing token: %v", err)
+		responser.NewErrorResponse(c, http.StatusUnauthorized, "invalid token")
+		return
 	}
 	fmt.Println(user)
 	c.Set(userId, user.Id)

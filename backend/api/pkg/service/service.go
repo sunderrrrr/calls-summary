@@ -3,11 +3,14 @@ package service
 import (
 	"api/models"
 	"api/pkg/repository"
+	"io"
 	"time"
 )
 
 type Service struct {
 	Auth
+	User
+	Report
 }
 
 const (
@@ -23,8 +26,19 @@ type Auth interface {
 	ParseToken(token string) (models.User, error)           // middleware
 }
 
+type User interface {
+	ResetPassword(request models.UserReset) error
+	ForgotPassword(request models.ResetRequest) error
+}
+
+type Report interface {
+	ReportCall(file io.Reader, filename string) (string, error)
+}
+
 func NewService(repository *repository.Repository) *Service {
 	return &Service{
-		Auth: NewAuthService(repository.Auth),
+		Auth:   NewAuthService(repository.Auth),
+		Report: NewReportService(),
+		User:   NewUserService(repository.User),
 	}
 }

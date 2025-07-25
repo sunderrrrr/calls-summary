@@ -7,3 +7,19 @@ GET http://localhost:8080/api/v1/user/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTMxMzY5NTIsImlhdCI6MTc1MzA5Mzc1MiwiaWQiOjMsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.RYHmQpPGq2EpBIX-ZD3wDgDU2sq_-8_zhtOhbwo9-_Y
 
 
+### Запрос на сброс пароля
+POST http://localhost:8080/api/v1/auth/forgot
+Content-Type: application/json
+
+{
+  "login": "ivan@example.com"
+}
+
+### Сброс пароля по токену
+POST http://localhost:8080/api/v1/auth/reset
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM0NTI2MTgsImlhdCI6MTc1MzQ1MjAxOCwiZW1haWwiOiJpdmFuQGV4YW1wbGUuY29tIn0.kgLO_XhZ1fLGT38G-TABvTNzPgJfO6_Pp3q1QK1fHoo",
+  "new_password": "NewSecurePass123"
+}

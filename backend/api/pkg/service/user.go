@@ -12,10 +12,10 @@ import (
 )
 
 type UserService struct {
-	repo repository.UserRepository
+	repo repository.User
 }
 
-func NewUserService(repo repository.UserRepository) *UserService {
+func NewUserService(repo repository.User) *UserService {
 	return &UserService{repo: repo}
 }
 
