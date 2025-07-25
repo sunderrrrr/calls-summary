@@ -74,7 +74,7 @@ Content-Type: application/json
 **Ответ:**
 ```json
 {
-  "message": "reset link sent"
+  "message": "reset link sent to your email"
 }
 ```
 
@@ -98,7 +98,7 @@ Content-Type: application/json
 **Ответ:**
 ```json
 {
-  "message": "password reset successful"
+  "message": "password reset successfully"
 }
 ```
 
