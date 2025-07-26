@@ -1,18 +1,14 @@
 from typing import List
+from pyannote.audio import Pipeline
 
 def diarize_speakers(file_path: str) -> List[str]:
     '''
-    Шаблон функции диаризации с использованием pyannote.audio.
-    Здесь будет определение, кто когда говорил.
+    Диаризация с использованием pyannote.audio.
     '''
-    # TODO: Подключить pyannote.audio и HuggingFace токен
-    # from pyannote.audio import Pipeline
-    # pipeline = Pipeline.from_pretrained('pyannote/speaker-diarization', use_auth_token='your_token_here')
-    # diarization = pipeline(file_path)
+    pipeline = Pipeline.from_pretrained('pyannote/speaker-diarization', use_auth_token='your_token_here')
+    diarization = pipeline(file_path)
 
-    # Пример возвращаемого списка:
-    return [
-        "Speaker 1: 0.00s - 10.25s",
-        "Speaker 2: 10.25s - 20.70s",
-        "Speaker 1: 20.70s - 32.00s"
-    ]
+    segments = []
+    for turn, _, speaker in diarization.itertracks(yield_label=True):
+        segments.append(f"{speaker}: {turn.start:.2f}s - {turn.end:.2f}s")
+    return segments
