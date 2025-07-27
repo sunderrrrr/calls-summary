@@ -3,6 +3,7 @@ package service
 import (
 	"api/models"
 	"api/pkg/repository"
+	"api/pkg/utils/logger"
 	"errors"
 	"io"
 )
@@ -34,6 +35,22 @@ func (s *AnalysisService) SendMessageToChat(analysisId string, userId int, messa
 	err := s.repo.AddChatMessage(analysisId, userId, message.Sender, message.Message)
 	if err != nil {
 		return errors.New("failed to send message: " + err.Error())
+	}
+
+	if message.Sender == "user" {
+		history, err := s.GetChatHistory(analysisId, userId)
+		if err != nil {
+			return errors.New("failed to get chat history: " + err.Error())
+		}
+		newMsg, err := AskLLM(history)
+		if err != nil {
+			return errors.New("failed to get response from LLM: " + err.Error())
+		}
+		err = s.repo.AddChatMessage(analysisId, userId, "bot", newMsg.Message)
+		if err != nil {
+			return errors.New("failed to send bot message: " + err.Error())
+		}
+		logger.Log.Debugln("bot message: %s", newMsg.Message)
 	}
 	return nil
 }

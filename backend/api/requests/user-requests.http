@@ -4,9 +4,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTMxMzY5N
 
 ### Публичные данные пользователя
 GET http://localhost:8080/api/v1/user/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTMxMzY5NTIsImlhdCI6MTc1MzA5Mzc1MiwiaWQiOjMsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.RYHmQpPGq2EpBIX-ZD3wDgDU2sq_-8_zhtOhbwo9-_Y
-
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
 ### Запрос на сброс пароля
 POST http://localhost:8080/api/v1/auth/forgot
 Content-Type: application/json

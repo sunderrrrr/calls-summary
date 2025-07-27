@@ -1,0 +1,35 @@
+### Тестовый запрос с видеофайлом на анализ
+POST http://localhost:8080/api/v1/analysis/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="recording (3).webm"
+Content-Type: video/webm
+
+< ./recording (3).webm
+--boundary--
+
+### Получение всех анализов пользователя
+GET http://localhost:8080/api/v1/analysis/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Content-Type: application/json
+
+###
+
+### Получение истории чата для анализа
+GET http://localhost:8080/api/v1/analysis/44bd2794-e876-4d11-a569-a38c8ec1a8d3/chat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Content-Type: application/json
+
+###
+
+### Отправка сообщения в чат
+POST http://localhost:8080/api/v1/analysis/44bd2794-e876-4d11-a569-a38c8ec1a8d3/chat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Content-Type: application/json
+
+{
+  "sender": "user",
+  "message": "Пример сообщения для чата"
+}

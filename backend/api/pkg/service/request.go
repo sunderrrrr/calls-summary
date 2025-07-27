@@ -6,11 +6,9 @@ import (
 	"api/pkg/utils/logger"
 	"bytes"
 	"encoding/json"
-	"errors"
 	"io"
 	"mime/multipart"
 	"net/http"
-	"os"
 )
 
 func ReportCall(file io.Reader, filename string) (models.AnalysisResponse, error) {
@@ -29,27 +27,16 @@ func ReportCall(file io.Reader, filename string) (models.AnalysisResponse, error
 		return models.AnalysisResponse{}, err
 	}
 
-	if err := writer.WriteField("model", "gpt-4o-mini-transcribe"); err != nil {
-		logger.Log.Errorf("write field: %v", err)
-		return models.AnalysisResponse{}, err
-	}
-
 	if err := writer.Close(); err != nil {
 		logger.Log.Errorf("close writer: %v", err)
 		return models.AnalysisResponse{}, err
 	}
 
-	apiKey := os.Getenv("OPENAI_API_KEY")
-	if apiKey == "" {
-		return models.AnalysisResponse{}, errors.New("OPENAI_API_KEY not set")
-	}
-
-	req, err := http.NewRequest("POST", "https://openai.api.proxyapi.ru/v1/audio/transcriptions", &buffer)
+	req, err := http.NewRequest("POST", "http://localhost:8090/call-analysis", &buffer)
 	if err != nil {
 		logger.Log.Errorf("new request: %v", err)
 		return models.AnalysisResponse{}, err
 	}
-	req.Header.Set("Authorization", "Bearer "+apiKey)
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 
 	resp, err := httpClient.DefaultClient.Do(req)
@@ -63,4 +50,45 @@ func ReportCall(file io.Reader, filename string) (models.AnalysisResponse, error
 		return models.AnalysisResponse{}, err
 	}
 	return response, nil
+}
+
+func AskLLM(message []models.ChatMessage) (models.ChatMessage, error) {
+	var response struct {
+		Message string `json:"message"`
+	}
+	marsh, err := json.Marshal(message)
+	if err != nil {
+		logger.Log.Errorf("marshal message err: %v", err)
+		return models.ChatMessage{}, err
+	}
+	req, err := http.NewRequest("POST", "http://localhost:8090/chat-response", bytes.NewBuffer(marsh))
+	if err != nil {
+		logger.Log.Errorf("new request: %v", err)
+		return models.ChatMessage{}, err
+	}
+
+	resp, err := httpClient.DefaultClient.Do(req)
+	if err != nil {
+		logger.Log.Errorf("send request: %v", err)
+		return models.ChatMessage{}, err
+	}
+	defer resp.Body.Close()
+	// Читаем тело для диагностики
+	bodyBytes, err := io.ReadAll(resp.Body)
+	if err != nil {
+		logger.Log.Errorf("read response body: %v", err)
+		return models.ChatMessage{}, err
+	}
+	logger.Log.Infof("response body: %s", string(bodyBytes))
+
+	// Теперь пробуем декодировать тело, для этого создаем новый reader
+	if err := json.NewDecoder(bytes.NewReader(bodyBytes)).Decode(&response); err != nil {
+		logger.Log.Errorf("decode response: %v", err)
+		return models.ChatMessage{}, err
+	}
+
+	return models.ChatMessage{
+		Message: response.Message,
+		Sender:  "bot",
+	}, nil
 }

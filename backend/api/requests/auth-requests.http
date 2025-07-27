@@ -3,7 +3,7 @@ POST http://localhost:8080/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-  "nam": "Иван Иванов",
+  "name": "Иван Иванов",
   "email": "ivan@example.com",
   "password": "strongpassword123"
 }
@@ -14,6 +14,6 @@ Content-Type: application/json
 
 {
   "email": "ivan@example.com",
-  "password": "NewSecurePass12"
+  "password": "strongpassword123"
 }
 
