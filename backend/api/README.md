@@ -17,7 +17,7 @@
 ### 1. Запуск PostgreSQL в Docker 🐘
 
 ```bash
-docker run --name=name-db -e POSTGRES_PASSWORD=qwerty -p 5436:5432 -d postgres
+docker run --name=calls-db -e POSTGRES_PASSWORD=qwerty -p 5436:5432 -d postgres
 ```
 
 Это создаст и запустит контейнер с PostgreSQL, доступным на порту `5436`. 🔥

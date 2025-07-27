@@ -44,12 +44,14 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			}
 			user := v1.Group("/user", h.userIdentify)
 			{
-				user.GET("/ping", h.Ping)
 				user.GET("/", h.getUserInfo)
 			}
-			report := v1.Group("/report", h.userIdentify)
+			analysis := v1.Group("/analysis", h.userIdentify)
 			{
-				report.POST("/", h.reportOfCall)
+				analysis.POST("/", h.analyzeCall)                   // Отправка отчета, возвращает json с uuid анализа в случае успеха
+				analysis.GET("/", h.GetAllAnalyses)                 // Получение всех анализов пользователя
+				analysis.GET("/:analysisId/chat", h.GetChatHistory) // Получение истории сообщений
+				analysis.POST("/:analysisId/chat", h.AddMessage)    // Добавление сообщения в чат
 
 			}
 		}

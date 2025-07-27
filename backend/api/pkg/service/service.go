@@ -10,7 +10,7 @@ import (
 type Service struct {
 	Auth
 	User
-	Report
+	Analysis
 }
 
 const (
@@ -31,14 +31,19 @@ type User interface {
 	ForgotPassword(request models.ResetRequest) error
 }
 
-type Report interface {
-	ReportCall(file io.Reader, filename string) (string, error)
+type Analysis interface {
+	AnalyzeCall(userId int, file io.Reader, filename string) (string, error)
+	SendMessageToChat(analysisId string, userId int, message models.ChatMessage) error
+	GetChatHistory(analysisId string, userId int) ([]models.ChatMessage, error)
+}
+
+type Chat interface {
 }
 
 func NewService(repository *repository.Repository) *Service {
 	return &Service{
-		Auth:   NewAuthService(repository.Auth),
-		Report: NewReportService(),
-		User:   NewUserService(repository.User),
+		Auth:     NewAuthService(repository.Auth),
+		User:     NewUserService(repository.User),
+		Analysis: NewAnalysisService(repository.Analysis),
 	}
 }

@@ -1,6 +1,6 @@
 ### 🧾 Общие заголовки:
 ```
-Authorization: Bearer <token>  // Только для защищённых маршрутов
+Authorization: Bearer <token> 
 Content-Type: application/json
 ```
 

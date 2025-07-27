@@ -47,7 +47,7 @@ func (h *Handler) resetPassword(c *gin.Context) {
 		return
 	}
 	if err := h.service.User.ResetPassword(input); err != nil {
-		responser.NewErrorResponse(c, http.StatusInternalServerError, "failed to reset password")
+		responser.NewErrorResponse(c, http.StatusInternalServerError, "reset password failed")
 		logger.Log.Errorf("failed to reset password: %v", err)
 		return
 	}
