@@ -66,27 +66,21 @@ func AskLLM(message []models.ChatMessage) (models.ChatMessage, error) {
 		logger.Log.Errorf("new request: %v", err)
 		return models.ChatMessage{}, err
 	}
-
 	resp, err := httpClient.DefaultClient.Do(req)
 	if err != nil {
 		logger.Log.Errorf("send request: %v", err)
 		return models.ChatMessage{}, err
 	}
 	defer resp.Body.Close()
-	// Читаем тело для диагностики
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		logger.Log.Errorf("read response body: %v", err)
 		return models.ChatMessage{}, err
 	}
-	logger.Log.Infof("response body: %s", string(bodyBytes))
-
-	// Теперь пробуем декодировать тело, для этого создаем новый reader
 	if err := json.NewDecoder(bytes.NewReader(bodyBytes)).Decode(&response); err != nil {
 		logger.Log.Errorf("decode response: %v", err)
 		return models.ChatMessage{}, err
 	}
-
 	return models.ChatMessage{
 		Message: response.Message,
 		Sender:  "bot",
