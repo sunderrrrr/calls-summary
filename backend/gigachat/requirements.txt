@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+whisper
+pyannote.audio
+python-docx
+fpdf
+requests
