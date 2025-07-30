@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"github.com/golang-jwt/jwt"
+	"os"
 	"time"
 )
 
@@ -30,6 +31,11 @@ type tokenClaims struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
+
+var (
+	salt      = os.Getenv("PASS_SALT")
+	secretKey = os.Getenv("JWT_KEY")
+)
 
 func saltPassword(password, salt string) string {
 	h := hmac.New(sha256.New, []byte(secretKey))

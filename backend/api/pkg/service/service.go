@@ -19,8 +19,6 @@ type Service struct {
 }
 
 const (
-	salt          = "hifu&hfI&fG&Igaw"
-	secretKey     = "2c3982433nc89m43v3n89323492u49"
 	tokenTTL      = 12 * time.Hour
 	resetTokenTTL = time.Minute * 10
 )
