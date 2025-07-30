@@ -1,6 +1,6 @@
 package models
 
-type User struct {
+type User struct { // Структура пользователя
 	Id       int    `json:"id" db:"id"`
 	Name     string `json:"name" db:"name"`
 	Email    string `json:"email" db:"email"`
@@ -9,27 +9,27 @@ type User struct {
 
 }
 
-type SignUpInput struct {
+type SignUpInput struct { // Структура для регистрации пользователя
 	Name     string `json:"name" binding:"required"`
 	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-type SignInInput struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+type SignInInput struct { // Структура для входа пользователя
+	Email    string `json:"email" binding:"required"`
+	Password string `json:"password" binding:"required"`
 }
 
-type UserReset struct {
+type UserReset struct { // Структура для сброса пароля
 	Token   string `json:"token" binding:"required"`
 	NewPass string `json:"new_password" binding:"required"`
 }
 
-type ResetRequest struct {
+type ResetRequest struct { // Структура для запроса сброса пароля
 	Login string `json:"login" binding:"required"`
 }
 
-type UserInfo struct {
+type UserInfo struct { // Структура для получения информации о пользователе
 	Id    int    `json:"id"`
 	Name  string `json:"name"`
 	Email string `json:"email"`

@@ -8,12 +8,12 @@ import (
 )
 
 type DB struct {
-	Hostname string
-	Port     string
-	Username string
-	Password string
-	Dbname   string
-	SSLMode  string
+	Hostname string // Хост базы данных
+	Port     string // Порт базы данных
+	Username string // Имя пользователя базы данных
+	Password string // Пароль пользователя базы данных
+	Dbname   string // Имя базы данных
+	SSLMode  string // Режим SSL подключения
 }
 
 const (
@@ -22,6 +22,9 @@ const (
 )
 
 func NewDB(config DB) (*sqlx.DB, error) {
+	// Создает новое подключение к базе данных с использованием переданной конфигурации
+	// Проверяет соединение с базой данных
+	// Возвращает объект подключения или ошибку
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", config.Hostname, config.Port, config.Username, config.Password, config.Dbname, config.SSLMode)
 
 	db, err := sqlx.Connect("postgres", dsn)

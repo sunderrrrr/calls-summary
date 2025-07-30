@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+/*
+Операции над пользовательскими данными. Пока что реализовано изменение пароля
+*/
+
 type UserService struct {
 	repo repository.User
 }

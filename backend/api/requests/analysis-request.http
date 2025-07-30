@@ -1,6 +1,6 @@
 ### Тестовый запрос с видеофайлом на анализ
 POST http://localhost:8080/api/v1/analysis/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM4NDI1MjMsImlhdCI6MTc1Mzc5OTMyMywiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.DV8Y25vv-llWuFQaqPPpNB42iosE2YZgsqjCBZV5t3U
 Content-Type: multipart/form-data; boundary=boundary
 
 --boundary
@@ -12,21 +12,21 @@ Content-Type: video/webm
 
 ### Получение всех анализов пользователя
 GET http://localhost:8080/api/v1/analysis/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM4NDI1MjMsImlhdCI6MTc1Mzc5OTMyMywiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.DV8Y25vv-llWuFQaqPPpNB42iosE2YZgsqjCBZV5t3U
 Content-Type: application/json
 
 ###
 
 ### Получение истории чата для анализа
-GET http://localhost:8080/api/v1/analysis/44bd2794-e876-4d11-a569-a38c8ec1a8d3/chat
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+GET http://localhost:8080/api/v1/analysis/5674348a-e42a-475c-ac74-ca5f69289f47/chat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM4NDI1MjMsImlhdCI6MTc1Mzc5OTMyMywiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.DV8Y25vv-llWuFQaqPPpNB42iosE2YZgsqjCBZV5t3U
 Content-Type: application/json
 
 ###
 
 ### Отправка сообщения в чат
-POST http://localhost:8080/api/v1/analysis/44bd2794-e876-4d11-a569-a38c8ec1a8d3/chat
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM2NzYwODgsImlhdCI6MTc1MzYzMjg4OCwiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.u7ZFicwqYHWe6-gReBTiR7VSm59A7olKOkFWu7aUcP4
+POST http://localhost:8080/api/v1/analysis/5674348a-e42a-475c-ac74-ca5f69289f47/chat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTM4NDI1MjMsImlhdCI6MTc1Mzc5OTMyMywiaWQiOjEsIm5hbWUiOiLQmNCy0LDQvSDQmNCy0LDQvdC-0LIiLCJlbWFpbCI6Iml2YW5AZXhhbXBsZS5jb20ifQ.DV8Y25vv-llWuFQaqPPpNB42iosE2YZgsqjCBZV5t3U
 Content-Type: application/json
 
 {

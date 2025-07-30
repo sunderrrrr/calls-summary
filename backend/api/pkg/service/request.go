@@ -11,7 +11,11 @@ import (
 	"net/http"
 )
 
+//Отправка и прием запросов к внешнему fast api сервису для анализа звонков и общения с LLM. Данные используются в service/analysis.go
+
 func ReportCall(file io.Reader, filename string) (models.AnalysisResponse, error) {
+	// Отправляет файл звонка на внешний FastAPI сервис для анализа
+	// Возвращает результат анализа в формате AnalysisResponse, FastAPI также должен возвращать данные в этом формате
 	var buffer bytes.Buffer
 	var response models.AnalysisResponse
 	writer := multipart.NewWriter(&buffer)
@@ -53,6 +57,8 @@ func ReportCall(file io.Reader, filename string) (models.AnalysisResponse, error
 }
 
 func AskLLM(message []models.ChatMessage) (models.ChatMessage, error) {
+	// Отправляет историю сообщений чата на внешний FastAPI сервис. Ответ от fast api сервиса должен соответствовать формату переменной response
+	// Получает ответ от LLM и возвращает его в формате ChatMessage
 	var response struct {
 		Message string `json:"message"`
 	}
